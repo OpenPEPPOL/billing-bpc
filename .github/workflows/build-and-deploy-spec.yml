@@ -2,7 +2,7 @@ name: Deploy Billing BPC to Test-docs
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build:
