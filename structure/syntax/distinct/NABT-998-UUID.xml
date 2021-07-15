@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Element cardinality="0..1" xmlns="urn:fdc:difi.no:2017:vefa:structure-1">
+
+		<Term>cbc:UUID</Term>
+		<Name>UUID</Name>
+		<Description>(Distinct) — A universally unique identifier for an instance of this document.</Description>
+		<DataType>Identifier</DataType>
+		<Reference type="BUSINESS_TERM">NABT-998</Reference>
+		<Section>Distinct</Section>
+                
+ 	</Element>
