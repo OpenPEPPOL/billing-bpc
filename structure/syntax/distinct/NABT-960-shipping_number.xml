@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Element cardinality="0..1" xmlns="urn:fdc:difi.no:2017:vefa:structure-1">
+
+		<Term>cac:Despatch</Term>
+		<Name>Despatch</Name>
+		
+		<Element>    
+			<Term>cbc:ID</Term>
+			<Name>Shipping Number</Name>
+			<Description>(Distinct) — A textual note that gives unstructured information that is relevant to the Invoice line.</Description>
+			<DataType>Identifier</DataType>
+			<Reference type="BUSINESS_TERM">NABT-960</Reference>
+			<Section>Distinct</Section>
+		</Element>
+	
+ 	</Element>
