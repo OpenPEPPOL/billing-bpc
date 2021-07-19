@@ -32,6 +32,8 @@
             <Value type="DEFAULT">urn:fdc:peppol.eu:2017:poacc:billing:01:1.0</Value>
 			<Section>Shared</Section>
         </Element>
+		
+		<Include>distinct/NABT-994-session_identifier.xml</Include>
 
         <Element>
             <Term>cbc:ID</Term>
