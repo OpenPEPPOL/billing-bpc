@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Element cardinality="0..1" xmlns="urn:fdc:difi.no:2017:vefa:structure-1">
+
+		<Term>cbc:IssueDate</Term>
+		<Name>Date of Order Reference</Name>
+		<Description>(Distinct) — The date the order is received by the supplier or sent by the buyer. </Description>
+		<DataType>Date</DataType>
+		<Reference type="BUSINESS_TERM">NABT-995</Reference>
+		<Section>Distinct</Section>
+                
+ 	</Element>
