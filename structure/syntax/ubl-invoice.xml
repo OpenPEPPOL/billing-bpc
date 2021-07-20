@@ -377,6 +377,9 @@
 				<Reference type="BUSINESS_TERM">IBT-083</Reference>
 				<Value type="EXAMPLE">432948234234234</Value>
 				<Section>Shared</Section>
+				
+				<Include>distinct/NABT-959-payment_method_id_scheme.xml</Include>
+				
 			</Element>
 
             <Include>shared/IBG-18-card-payment.xml</Include>
