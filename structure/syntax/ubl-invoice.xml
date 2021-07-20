@@ -552,6 +552,8 @@
             <Include>distinct/NABG-993-line_delivery.xml</Include>
             
             <Include>shared/IBG-27-28-line-allowance-charge.xml</Include>
+			
+			<Include>distinct/NABG-994-line_tax_total.xml</Include>
 
             <Include>shared/IBG-31-item.xml</Include>
               
