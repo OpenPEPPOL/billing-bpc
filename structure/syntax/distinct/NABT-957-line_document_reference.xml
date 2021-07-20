@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Element cardinality="0..n" xmlns="urn:fdc:difi.no:2017:vefa:structure-1">
+
+		<Term>cac:DocumentReference</Term>
+		<Name>Document Referenc</Name>
+		
+		<Element>    
+			<Term>cbc:ID</Term>
+			<Name>Document Reference</Name>
+			<Description>(Distinct) — Reference to: Contract Number, PO Number, Billing, dispatch, receipt, originator, project, sales, see reference information tab for others, contracts, etc.</Description>
+			<DataType>Identifier</DataType>
+			<Reference type="BUSINESS_TERM">NABT-957</Reference>
+			<Section>Distinct</Section>
+		</Element>
+	
+ 	</Element>
