@@ -3,7 +3,7 @@
 
         <Term>cac:Delivery</Term>
         <Name>DELIVERY INFORMATION</Name>
-        <Description>(Shared) — A group of business terms providing information about where and when the goods and services invoiced are delivered.</Description>
+        <Description>(Distinct) — A group of business terms providing information about where and when the goods and services invoiced are delivered.</Description>
         <Reference type="BUSINESS_TERM">NABG-993</Reference>
         
 		<Element>

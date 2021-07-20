@@ -508,6 +508,8 @@
 					<Section>Shared</Section>
                 </Element>
             </Element>
+			
+			<Include>distinct/NABT-933-934-line_receipt_document_reference.xml</Include>
 
             <Include>distinct/NABT-957-line_document_reference.xml</Include>
 
