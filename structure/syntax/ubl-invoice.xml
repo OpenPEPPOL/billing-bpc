@@ -546,6 +546,8 @@
 				</Element>
  
 			</Element>
+
+            <Include>distinct/NABG-993-line_delivery.xml</Include>
             
             <Include>shared/IBG-27-28-line-allowance-charge.xml</Include>
 
