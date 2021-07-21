@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Element cardinality="0..n" xmlns="urn:fdc:difi.no:2017:vefa:structure-1">
+
+		<Term>cac:ManufacturersItemIdentification</Term>
+		<Name>Manufacturers Item Identification</Name>
+		
+		<Element>    
+			<Term>cbc:ID</Term>
+			<Name>Manufacturer Identification Number</Name>
+			<Description>(Distinct) — An identifier, assigned by the manufacturer, for the item.</Description>
+			<DataType>Identifier</DataType>
+			<Reference type="BUSINESS_TERM">NABT-946</Reference>
+			<Section>Distinct</Section>
+		</Element>
+	
+ 	</Element>

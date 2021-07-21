@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Element cardinality="0..n" xmlns="urn:fdc:difi.no:2017:vefa:structure-1">
+
+		<Term>cac:ReceiptLineReference</Term>
+		<Name>Receipt Line Reference</Name>
+		
+		<Element>    
+			<Term>cbc:ID</Term>
+			<Name>Proof of Receipt Identifier</Name>
+			<Description>(Distinct) — A reference to a receipt line associated with this document line.</Description>
+			<DataType>Identifier</DataType>
+			<Reference type="BUSINESS_TERM">NABT-934</Reference>
+			<Section>Distinct</Section>
+		</Element>
+		
+		<Element>    
+			<Term>cac:DocumentReference</Term>
+			<Name>Document Reference</Name>
+			<Section>Distinct</Section>
+
+			<Element>    
+				<Term>cbc:ID</Term>
+				<Name>Proof of Receipt Document</Name>
+				<Description>(Distinct) — A document containing a written and signed aknowledgement by the recipient for payment of goods.</Description>
+				<DataType>Identifier</DataType>
+				<Reference type="BUSINESS_TERM">NABT-933</Reference>
+				<Section>Distinct</Section>
+			</Element>
+
+		</Element>			
+ 	</Element>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Element xmlns="urn:fdc:difi.no:2017:vefa:structure-1" cardinality="0..n">
+    
+	<Term>cac:TaxTotal</Term>
+	<Name>INVOICE LINE AND CREDIT NOTE LINE TAX INFORMATION</Name>
+	<Description>(Distinct) — A group of business terms providing information about the invoice line tax details.</Description>
+	<Reference type="BUSINESS_TERM">NABG-994</Reference>
+
+	<Element>
+		<Term>cbc:TaxAmount</Term>
+		<Name>Tax Amount</Name>
+		<Description>(Distinct) — The total tax amount for the Invoice or Credit Note Line.</Description>
+		<DataType>Amount</DataType>
+		<Reference type="BUSINESS_TERM">NABT-955</Reference>
+		<Section>Distinct</Section>
+		
+		<Attribute>
+			<Term>currencyID</Term>
+			<Reference type="CODE_LIST">ISO4217</Reference>
+		</Attribute>
+	</Element>
+	
+	<Element cardinality="0..n">
+	 
+			<Term>cac:TaxSubtotal</Term>
+			<Name>Tax Subtotal</Name>
+			<Reference type="BUSINESS_TERM">NABT-954</Reference>
+				
+			<Element>
+				<Term>cbc:TaxAmount</Term>
+				<Name>Tax Subtotal</Name>
+				<Description>(Distinct) — The amount of this tax subtotal.</Description>
+				<DataType>Amount</DataType>
+				<Reference type="BUSINESS_TERM">NABT-953</Reference>
+				<Section>Distinct</Section>			
+				
+				<Attribute>
+					<Term>currencyID</Term>
+					<Reference type="CODE_LIST">ISO4217</Reference>
+				</Attribute>
+			</Element>
+			
+			<Element>
+				<Term>cac:TaxCategory</Term>
+				<Name>Tax Category Code</Name>
+				
+				<Element>
+					<Term>cbc:ID</Term>
+					<Name>TAX category code</Name>
+					<Description>(Distinct) — Coded identification of a TAX category.</Description>
+					<DataType>Code</DataType>
+					<Reference type="BUSINESS_TERM">NABT-151</Reference>  
+					<Section>Distinct</Section>			
+				</Element>
+				
+				<Element>
+					<Term>cac:TaxScheme</Term>
+					<Name>Tax Scheme Identifier</Name>
+					
+					<Element>
+						<Term>cbc:ID</Term>
+						<Description>(Distinct) — The identification scheme identifier of the Line Tax.</Description>
+						<Reference type="BUSINESS_TERM">NABT-951</Reference>
+						<Section>Distinct</Section>			
+					</Element>
+
+				</Element>
+			</Element>
+		</Element>
+	</Element>
+        

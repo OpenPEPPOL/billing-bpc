@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Attribute xmlns="urn:fdc:difi.no:2017:vefa:structure-1">
+
+		<Term>schemeID</Term>
+		<Name>Scheme identifier</Name>
+		<Description>(Distinct) — The identification scheme identifier of the Payment Method Type Code.</Description>
+		<Reference type="BUSINESS_TERM">NABT-959</Reference>
+		<Section>Distinct</Section>
+
+	</Attribute>

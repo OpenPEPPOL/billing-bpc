@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Element cardinality="0..1" xmlns="urn:fdc:difi.no:2017:vefa:structure-1">
+
+		<Term>cbc:ProfileExecutionID</Term>
+		<Name>Session Identifier</Name>
+		<Description>(Distinct) — Identifies an instance of executing a profile, to associate all transactions in a collaboration.</Description>
+		<DataType>Identifier</DataType>
+		<Reference type="BUSINESS_TERM">NABT-994</Reference>
+		<Section>Distinct</Section>
+                
+ 	</Element>

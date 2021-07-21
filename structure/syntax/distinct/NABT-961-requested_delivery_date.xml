@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Element cardinality="0..1" xmlns="urn:fdc:difi.no:2017:vefa:structure-1">
+
+		<Term>cac:RequestedDeliveryPeriod</Term>
+		<Name>Despatch</Name>
+		
+		<Element>
+			<Term>cbc:StartDate</Term>
+			<Name>Requested Delivery Date</Name>
+			<Description>(Distinct) — The requested date of delivery.</Description>
+			<DataType>Date</DataType>
+			<Reference type="BUSINESS_TERM">NABT-961</Reference>
+			<Section>Distinct</Section>
+		</Element>
+		
+ 	</Element>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Element cardinality="0..n" xmlns="urn:fdc:difi.no:2017:vefa:structure-1">
+
+		<Term>cac:ItemInstance</Term>
+		<Name>Item Instance</Name>
+		<Description>(Distinct) — A trackable, unique instance of this item.</Description>
+		<Reference type="BUSINESS_TERM">NABG-945</Reference>
+		
+		<Element cardinality="0..n">    
+			<Term>cbc:SerialID</Term>
+			<Name>Serial Identification Number</Name>
+			<Description>(Distinct) — The serial number of this item instance.</Description>
+			<DataType>Identifier</DataType>
+			<Reference type="BUSINESS_TERM">NABT-944</Reference>
+			<Section>Distinct</Section>
+		</Element>
+		
+		<Element cardinality="0..1">    
+			<Term>cac:LotIdentification</Term>
+			<Name>Lot Identification</Name>
+			<Description>(Distinct) — The lot identifier of this item instance (the identifier that allows recall of the item if necessary).</Description>
+			<Section>Distinct</Section>
+			<Reference type="BUSINESS_TERM">NABG-943</Reference>
+		
+			<Element>    
+				<Term>cbc:LotNumberID</Term>
+				<Name>Lot Identification Number</Name>
+				<Description>(Distinct) — An identifier for the lot.</Description>
+				<DataType>Identifier</DataType>
+				<Reference type="BUSINESS_TERM">NABT-942</Reference>
+				<Section>Distinct</Section>
+			</Element>
+
+		</Element>		
+ 	</Element>

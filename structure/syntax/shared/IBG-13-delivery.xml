@@ -8,6 +8,8 @@
         </Description>
         <Reference type="BUSINESS_TERM">IBG-13</Reference>
         
+        <Include>../distinct/NABT-962-delivery_reference_number.xml</Include>
+		
         <Element cardinality="0..1">
             <Term>cbc:ActualDeliveryDate</Term>
             <Name>Actual delivery date</Name>
@@ -137,6 +139,8 @@
                 </Element>
             </Element>
         </Element>
+
+        <Include>../distinct/NABT-961-requested_delivery_date.xml</Include>
         
         <Element cardinality="0..1">
             <Term>cac:DeliveryParty</Term>
@@ -157,5 +161,8 @@
                 </Element>
             </Element>
         </Element>
+		
+		<Include>../distinct/NABT-960-shipping_number.xml</Include>
+		
     </Element>
     

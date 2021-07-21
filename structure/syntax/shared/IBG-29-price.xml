@@ -55,6 +55,8 @@
                 <Value type="FIXED">false</Value>
             </Element>
 
+            <Include>../distinct/NABT-950-item_price_discount_percentage.xml</Include>
+
             <Element>
                 <Term>cbc:Amount</Term>
                 <Name>Item price discount</Name>
@@ -78,7 +80,6 @@
                 <Description>(Shared) — The unit price, exclusive of VAT, before subtracting Item price discount, can not be negative</Description>
                 <DataType>Amount</DataType>
                 <Reference type="BUSINESS_TERM">IBT-148</Reference>
-                <!-- <Reference type="RULE">ibr-28</Reference> -->
                 <Value type="EXAMPLE">123.45</Value>
 				<Section>Shared</Section>            
                 

@@ -56,6 +56,8 @@
 				<Section>Shared</Section>
             </Element>
         </Element>
+		
+		<Include>../distinct/NABT-946-item_manufacturer_id.xml</Include>
         
         <Element cardinality="0..1">
             <Term>cac:StandardItemIdentification</Term>
@@ -159,5 +161,8 @@
 				<Section>Shared</Section>
             </Element>
         </Element>
+		
+		<Include>../distinct/NABT-942-945-item_instance.xml</Include>
+
     </Element>
     
