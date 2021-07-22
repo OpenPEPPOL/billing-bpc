@@ -54,16 +54,16 @@
     <Resource>
         <Identifier>ubl-japan</Identifier>
         <Type>native:Schematron</Type>
-        <Path>rules/sch/Japan-UBL-validation-preprocessed.sch</Path>
+        <Path>rules/sch/BPC-UBL-validation-preprocessed.sch</Path>
         <Title>PBC specific Invoice and Credit note rules</Title>
     </Resource>
     
     <Resource>
         <Type>native:File</Type>
-        <Path>rules/sch/PINT-UBL-validation-preprocessed.sch</Path>
+        <Path>rules/sch/BPC-UBL-validation-preprocessed.sch</Path>
         <Title>Schematron for BPC rules (UBL)</Title>
         <Description>PBC specific Invoice and Credit note rules.</Description>
-        <Property key="download">Japan-UBL-validation-preprocessed.sch</Property>
+        <Property key="download">BPC-UBL-validation-preprocessed.sch</Property>
     </Resource>
 
     <!--    <Resource>
