@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <buildConfigurations xmlns="http://difi.no/xsd/vefa/validator/1.0">
 
-  <package url="http://docs.peppol.eu/poacc/billing-japan/">PEPPOL BIS Japan Billing</package>
+  <package url="http://docs.peppol.eu/poacc/billing-bpc/">PEPPOL BIS BPC Billing</package>
 
   <testfolder>examples</testfolder>
   <testfolder>snippets</testfolder>
@@ -12,7 +12,7 @@
   <configuration>
     <identifier>peppolbis-pint-ubl</identifier>
     <title>PINT UBL 4.0</title>
-    <file path="sch/PINT-UBL-validation-preprocessed.sch" infoUrl="http://docs.peppol.eu/poacc/billing-japan/rules/{}/"/>
+    <file path="sch/PINT-UBL-validation-preprocessed.sch" infoUrl="http://docs.peppol.eu/poacc/pint/rules/{}/"/>
   </configuration>
 
 <!--   <configuration>
@@ -28,21 +28,21 @@
   </configuration>
 -->
   <configuration>
-    <identifier>peppolbis-japan-01-4.0-ubl-invoice</identifier>
-    <title>PEPPOL BIS Japan 4.0 (Profile 01)</title>
-    <declaration type="xml.ubl">Invoice::urn:peppol.org:pint:3.0#compliant#jp:billing:3.0</declaration>
+    <identifier>peppolbis-bpc-01-4.0-ubl-invoice</identifier>
+    <title>PEPPOL BIS BPC 4.0 (Profile 01)</title>
+    <declaration type="xml.ubl">Invoice::urn:peppol.org:pint:3.0#compliant#bpc:billing:3.0</declaration>
     <inherit>ubl-invoice-2.1</inherit>
     <inherit>peppolbis-pint-ubl</inherit>
-<!--    <inherit>peppolbis-japan-stylesheet-4.0-ubl</inherit> -->
+<!--    <inherit>peppolbis-bpc-stylesheet-4.0-ubl</inherit> -->
   </configuration>
 
   <configuration>
-    <identifier>peppolbis-japan-01-4.0-ubl-creditnote</identifier>
-    <title>PEPPOL BIS Japan 4.0 (Profile 01)</title>
-    <declaration type="xml.ubl">CreditNote::urn:peppol.org:pint:3.0#compliant#jp:billing:3.0</declaration>
+    <identifier>peppolbis-bpc-01-4.0-ubl-creditnote</identifier>
+    <title>PEPPOL BIS BPC 4.0 (Profile 01)</title>
+    <declaration type="xml.ubl">CreditNote::urn:peppol.org:pint:3.0#compliant#bpc:billing:3.0</declaration>
     <inherit>ubl-creditnote-2.1</inherit>
     <inherit>peppolbis-pint-ubl</inherit>
-<!--    <inherit>peppolbis-japan-stylesheet-3.0-ubl</inherit> -->
+<!--    <inherit>peppolbis-bpc-stylesheet-3.0-ubl</inherit> -->
   </configuration> -->
 
 </buildConfigurations>

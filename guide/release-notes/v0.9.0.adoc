@@ -1,5 +1,5 @@
 = Version 0.9.0
 [horizontal]
-Release date:: 2021-06-30
+Release date:: 2021-07-22
 
-* Draft for Japanese commercial invoice
+* Draft for BPC invoice

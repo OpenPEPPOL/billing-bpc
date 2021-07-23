@@ -3,7 +3,7 @@ include::settings.adoc[]
 = {doctitle}
 {name-op-en}
 v{version}
-:description: The Peppol BIS Japan Billing, has been developed by the OpenPEPPOL AISBL Post Award Coordinating Community and is published as part of the Peppol specifications.
+:description: The Peppol BIS BPC Billing, has been developed by the OpenPEPPOL AISBL Post Award Coordinating Community and is published as part of the Peppol specifications.
 :doctype: book
 :icons: font
 :stem:

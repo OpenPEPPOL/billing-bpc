@@ -1,7 +1,7 @@
 
 = Consumption tax (CT)
 
-The chapters below describe the different CT informations that can be provided in a Japanese {peppol} invoice or credit note.
+The chapters below describe the different CT informations that can be provided in a BPC {peppol} invoice or credit note.
 
 Please also see <<CT category codes>> for details on the CT category code list, and <<Calculation of CT>> for detailed explanation and example on how to perform the calculations for CT Breakdown.
 
