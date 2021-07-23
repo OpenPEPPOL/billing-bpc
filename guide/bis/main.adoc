@@ -20,7 +20,7 @@ v{version}
 
 = Link to main site of documentation
 
-link:/poacc/billing-japan/[Main documentation site]
+link:/poacc/billing-bpc/[Main documentation site]
 
 :leveloffset: +1
 
