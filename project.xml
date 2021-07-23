@@ -3,7 +3,7 @@
 
     <Name>BPC Invoice and Credit note Documentation</Name>
 
-    <Documentation path="bis/">PBC Invoice and Credit note specification (PINT)</Documentation>
+    <Documentation path="bis/">BPC Invoice and Credit note specification (PINT)</Documentation>
     <Documentation path="compliance/">PINT compliance</Documentation>
 	<Documentation path="release-notes/">Release notes</Documentation>
 
@@ -11,7 +11,7 @@
     <Resource>
         <Type>Doc-1</Type>
         <Path>bis/</Path>
-        <Title>PBC Invoice and Credit note specification (PINT)</Title>
+        <Title>BPC Invoice and Credit note specification (PINT)</Title>
     </Resource>
     <Resource>
         <Type>Doc-1</Type>
@@ -52,17 +52,17 @@
     </Resource>
 	
     <Resource>
-        <Identifier>ubl-japan</Identifier>
+        <Identifier>ubl-bpc</Identifier>
         <Type>native:Schematron</Type>
         <Path>rules/sch/BPC-UBL-validation-preprocessed.sch</Path>
-        <Title>PBC specific Invoice and Credit note rules</Title>
+        <Title>BPC specific Invoice and Credit note rules</Title>
     </Resource>
     
     <Resource>
         <Type>native:File</Type>
         <Path>rules/sch/BPC-UBL-validation-preprocessed.sch</Path>
         <Title>Schematron for BPC rules (UBL)</Title>
-        <Description>PBC specific Invoice and Credit note rules.</Description>
+        <Description>BPC specific Invoice and Credit note rules.</Description>
         <Property key="download">BPC-UBL-validation-preprocessed.sch</Property>
     </Resource>
 
