@@ -22,7 +22,11 @@
   <rule context="$Additional_supporting_documents">
     <assert test="$bpcbr-06" flag="fatal" id="bpcbr-06">[bpcbr-06]-Scheme Identifier does not exist when Invoiced Object Identifier is provided.</assert>
   </rule>
-  <rule context="$Amount_due">
+  <rule context="$Attachments">
+    <assert test="$bpcbr-53" flag="fatal" id="bpcbr-53">[bpcbr-53]-Attached document filename must exist exactly once.</assert>
+  </rule>
+  <rule context="$Allowance">
+    <assert test="$bpcbr-44" flag="fatal" id="bpcbr-44">[bpcbr-44]-Cannot have more than one Document level discount tax rate</assert>
   </rule>
   <rule context="$Buyer_electronic_address">
   </rule>
@@ -60,51 +64,39 @@
     <assert test="$bpcbr-23" flag="fatal" id="bpcbr-23">[bpcbr-23]-Customer - Accounts Payable must exist exactly once.</assert>
     <assert test="$bpcbr-34" flag="fatal" id="bpcbr-34">[bpcbr-34]-Cannot have more than one Deliver to party name.</assert>
     <!-- <assert test="$bpcbr-35" flag="fatal" id="bpcbr-35">[bpcbr-35]-Cannot be more than one Payment Instructions</assert>  Removed from BPC -->
-    <assert test="$bpcbr-39" flag="fatal" id="bpcbr-39">[bpcbr-39]-Payment Account Identifier must exist if Credit Transfer information is provided.</assert>
-    <assert test="$bpcbr-40" flag="fatal" id="bpcbr-40">[bpcbr-40]-Payment card primary account number must exist exactly once if Payment Card Information is provided.</assert>
     <assert test="$bpcbr-41" flag="fatal" id="bpcbr-41">[bpcbr-41]-Cannot have more than one Bank Assigned Creditor Identifier.</assert>
-    <assert test="$bpcbr-42" flag="fatal" id="bpcbr-42">[bpcbr-42]-Discount  indicator must exist</assert>
-    <assert test="$bpcbr-43" flag="fatal" id="bpcbr-43">[bpcbr-43]-Document level discount tax category code must reflect values from United Nations Economic Commission for Europe (UNECE) – (UNTDID) D. 16B – Duty or tax or fee category code (Subset of UNCL5305)</assert>
-    <assert test="$bpcbr-44" flag="fatal" id="bpcbr-44">[bpcbr-44]-Cannot have more than one Document level discount tax rate</assert>
-    <assert test="$bpcbr-45" flag="fatal" id="bpcbr-45">[bpcbr-45]-Charge indicator must exist</assert>
-    <assert test="$bpcbr-46" flag="fatal" id="bpcbr-46">[bpcbr-46]-Document level charge tax category code value must reflect United Nations Economic Commission for Europe (UNECE) – (UNTDID) D. 16B – Duty or tax or fee category code (Subset of UNCL5305).</assert>
-    <assert test="$bpcbr-47" flag="fatal" id="bpcbr-47">[bpcbr-47]-Document level charge reason code value must reflect United Nations Economic Commission for Europe (UNECE) - (UNTDID) – D.18A – Element 5189 (Allowance or charge identification code)</assert>
+    <!-- <assert test="$bpcbr-42" flag="fatal" id="bpcbr-42">[bpcbr-42]-Discount indicator must exist</assert> Model based -->
+    <!-- <assert test="$bpcbr-45" flag="fatal" id="bpcbr-45">[bpcbr-45]-Charge indicator must exist</assert> Model based -->
     <assert test="$bpcbr-48" flag="fatal" id="bpcbr-48">[bpcbr-48]-Tax Breakdown information must exist.</assert>
-    <assert test="$bpcbr-49" flag="fatal" id="bpcbr-49">[bpcbr-49]-Tax Category taxable amount must exist.</assert>
-    <assert test="$bpcbr-50" flag="fatal" id="bpcbr-50">[bpcbr-50]-Tax amount must equal to the taxable amount times the taxable rate, rounded to two decimals.</assert>
-    <assert test="$bpcbr-51" flag="fatal" id="bpcbr-51">[bpcbr-51]-Tax category code must reflect value from United Nations Economic Commission for Europe (UNECE) – (UNTDID) D. 16B – Duty or tax or fee category code (Subset of UNCL5305)</assert>
-    <assert test="$bpcbr-52" flag="fatal" id="bpcbr-52">[bpcbr-52]-More than one Tax Exemption Reason Text entry exists.</assert>
-    <assert test="$bpcbr-53" flag="fatal" id="bpcbr-53">[bpcbr-53]-Attached document filename must exist exactly once.</assert>
-    <assert test="$bpcbr-54" flag="fatal" id="bpcbr-54">[bpcbr-54]-Purchase Order Line Number must exist exactly once.</assert>
-    <assert test="$bpcbr-55" flag="fatal" id="bpcbr-55">[bpcbr-55]-Delivery identifier must exist.</assert>
-    <assert test="$bpcbr-56" flag="fatal" id="bpcbr-56">[bpcbr-56]-Tax Category Code must reflect value from United Nations Economic Commission for Europe (UNECE) – (UNTDID) D. 16B – Duty or tax or fee category code (Subset of UNCL5305)</assert>
-    <assert test="$bpcbr-57" flag="fatal" id="bpcbr-57">[bpcbr-57]-Tax Scheme value specified is invalid.</assert>
+    <!-- <assert test="$bpcbr-69" flag="fatal" id="bpcbr-69">[bpcbr-69]-Lot identification number is not specified or exists more than once.</assert> Not sure this has to be a requirement -->
+  </rule>
+  <rule context="$Invoice_line_tax">
+    <assert test="$bpcbr-65" flag="fatal" id="bpcbr-65">[bpcbr-65]-Invoiced Item Tax Rate and Per Unit Tax Amount are mutually exclusive.</assert>
+  </rule>
+  <rule context="$Invoice_line_charges">
+  </rule>
+  <rule context="$Invoice_Line">
+    <assert test="$bpcbr-54" flag="fatal" id="bpcbr-54">[bpcbr-54]-Purchase Order Line Number must exist at most once.</assert>
     <assert test="$bpcbr-58" flag="fatal" id="bpcbr-58">[bpcbr-58]- More than one Invoice Period Line exists.</assert>
     <assert test="$bpcbr-59" flag="fatal" id="bpcbr-59">[bpcbr-59]- Price Details must exist exactly once.</assert>
     <assert test="$bpcbr-60" flag="fatal" id="bpcbr-60">[bpcbr-60]-Cannot have more than one item price discount.</assert>
     <assert test="$bpcbr-61" flag="fatal" id="bpcbr-61">[bpcbr-61]-Cannot have more than one item gross price.</assert>
-    <assert test="$bpcbr-62" flag="fatal" id="bpcbr-62">[bpcbr-62]-Item Price Base Quanitity Unit of Measure Code must reflect value from UN/ECE Recommendation N.20 "Codes for Units of Measure Used in International Trade"</assert>
-    <assert test="$bpcbr-63" flag="fatal" id="bpcbr-63">[bpcbr-63]-Code must be equal to Invoiced Quantity Unit of Measure Code.</assert>
-    <assert test="$bpcbr-64" flag="fatal" id="bpcbr-64">[bpcbr-64]-Code must be equal to Credited Quantity Unit of Measure Code.</assert>
-    <assert test="$bpcbr-65" flag="fatal" id="bpcbr-65">[bpcbr-65]-Invoiced Item Tax Rate and Per Unit Tax Amount are mutually exclusive.</assert>
-    <assert test="$bpcbr-66" flag="fatal" id="bpcbr-66">[bpcbr-66]-Invoiced Item Tax Category Code must reflect value from United Nations Economic Commission for Europe (UNECE) – (UNTDID) D. 16B – Duty or tax or fee category code (Subset of UNCL5305)</assert>
-    <assert test="$bpcbr-67" flag="fatal" id="bpcbr-67">[bpcbr-67]-Invoiced Item Tax Scheme Identifier must reflect value from United Nations Economic Commission for Europe (UNECE) – (UNTDID) D. 18A – Usage of Element 5153 (Duty/tax/fee)</assert>
-    <assert test="$bpcbr-68" flag="fatal" id="bpcbr-68">[bpcbr-68]-Product/service code OR Product/service description is mandatory. </assert>
-    <assert test="$bpcbr-69" flag="fatal" id="bpcbr-69">[bpcbr-69]-Lot identification number is not specified or exists more than once.</assert>
-  </rule>
-  <rule context="$Invoice_line_allowances">
-  </rule>
-  <rule context="$Invoice_line_charges">
-  </rule>
-  <rule context="$Invoice_Line_Period">
   </rule>
   <rule context="$Invoice_Period">
   </rule>
+  <rule context="$Credit_transfer">
+  <assert test="$bpcbr-39" flag="fatal" id="bpcbr-39">[bpcbr-39]-Payment Account Identifier must exist if Credit Transfer information is provided.</assert>
+  </rule>
+  <rule context="$Card_account">
+  <assert test="$bpcbr-40" flag="fatal" id="bpcbr-40">[bpcbr-40]-Payment card primary account number must exist exactly once if Payment Card Information is provided.</assert>
+  </rule>
   <rule context="$Item_attributes">
   </rule>
-  <rule context="$Item_classification_identifier">
+  <rule context="$Item">
+    <assert test="$bpcbr-68" flag="fatal" id="bpcbr-68">[bpcbr-68]-Product/service code OR Product/service description is mandatory. </assert>
   </rule>
-  <rule context="$Item_standard_identifier">
+  <rule context="$Delivery">
+    <assert test="$bpcbr-55" flag="fatal" id="bpcbr-55">[bpcbr-55]-Delivery identifier must exist.</assert>
   </rule>
   <rule context="$Payee">
     <assert test="$bpcbr-20" flag="fatal" id="bpcbr-20">[bpcbr-10]-Scheme Identifier must exist if Supplier - Seller Identifier is provided.</assert>
@@ -139,10 +131,12 @@
   </rule>
   <rule context="$Seller_postal_address">
   </rule>
-  <rule context="$Tax_Representative">
-  </rule>
-  <rule context="$Tax_Representative_postal_address">
+  <rule context="$Tax_Subtotal">
+    <assert test="$bpcbr-49" flag="fatal" id="bpcbr-49">[bpcbr-49]-Tax Category taxable amount must exist.</assert>
+    <assert test="$bpcbr-52" flag="fatal" id="bpcbr-52">[bpcbr-52]-More than one Tax Exemption Reason Text entry exists.</assert>
   </rule>
   <rule context="$Tax_Total">
+    <assert test="$bpcbr-50" flag="fatal" id="bpcbr-50">[bpcbr-50]-Tax amount must equal to the taxable amount times the taxable rate, rounded to two decimals.</assert>
   </rule>
+  
 </pattern>

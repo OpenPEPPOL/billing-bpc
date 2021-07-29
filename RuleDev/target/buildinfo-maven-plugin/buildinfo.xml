@@ -76,10 +76,10 @@
   <map key="build.plugin.13.artifactid" value="maven-deploy-plugin" />
   <map key="build.plugin.13.version" value="2.8.2" />
   <map key="build.plugin.13.key" value="org.apache.maven.plugins:maven-deploy-plugin" />
-  <map key="build.datetime.text" value="2021-07-29T10:04:01.695463" />
-  <map key="build.datetime.millis" value="1627545841695" />
+  <map key="build.datetime.text" value="2021-07-29T12:59:00.336419" />
+  <map key="build.datetime.millis" value="1627556340336" />
   <map key="build.datetime.date" value="2021-07-29" />
-  <map key="build.datetime.time" value="10:04:01.695463" />
+  <map key="build.datetime.time" value="12:59:00.336419" />
   <map key="build.datetime.timezone.id" value="Europe/Madrid" />
   <map key="build.datetime.timezone.offsethours" value="2" />
   <map key="build.datetime.timezone.offsetmins" value="120" />
@@ -142,7 +142,7 @@
   <map key="systemproperty.user.name" value="oriolbausa" />
   <map key="systemproperty.user.timezone" value="Europe/Madrid" />
   <map key="envvar.JAVA_HOME" value="/Library/Java/JavaVirtualMachines/jdk-13.jdk/Contents/Home" />
-  <map key="envvar.JAVA_MAIN_CLASS_63959" value="org.codehaus.plexus.classworlds.launcher.Launcher" />
+  <map key="envvar.JAVA_MAIN_CLASS_71007" value="org.codehaus.plexus.classworlds.launcher.Launcher" />
   <map key="envvar.MAVEN_CMD_LINE_ARGS" value=" -f pom-xslt.xml process-resources" />
   <map key="envvar.MAVEN_PROJECTBASEDIR" value="/Users/oriolbausa/Documents/Invinet/projectes/OpenPEPPOL/billing-bpc/RuleDev" />
 </mapping>

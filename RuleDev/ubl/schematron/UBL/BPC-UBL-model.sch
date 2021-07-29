@@ -55,43 +55,33 @@
   <param name="bpcbr-36" value="if (some $code in (17, 18, 20, 28, 29, 30, 32, 33, 35, 36, 39, 40, 41, 43, 48, 49, 54) satisfies normalize-space(cbc:PaymentMeansCode) = string($code) ) then count (../cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cbc:ID) = 1 else true()"/>
   <param name="bpcbr-37" value="count(cbc:PaymentMeansCode/@Name) &lt;= 1"/>
   <param name="bpcbr-38" value="count(cbc:PaymentID) &lt;= 1"/>
-  <param name="bpcbr-39" value="true()"/>
-  <param name="bpcbr-40" value="true()"/>
-  <param name="bpcbr-41" value="true()"/>
-  <param name="bpcbr-42" value="true()"/>
-  <param name="bpcbr-43" value="true()"/>
-  <param name="bpcbr-44" value="true()"/>
-  <param name="bpcbr-45" value="true()"/>
-  <param name="bpcbr-46" value="true()"/>
-  <param name="bpcbr-47" value="true()"/>
-  <param name="bpcbr-48" value="true()"/>
-  <param name="bpcbr-49" value="true()"/>
-  <param name="bpcbr-50" value="true()"/>
-  <param name="bpcbr-51" value="true()"/>
-  <param name="bpcbr-52" value="true()"/>
-  <param name="bpcbr-53" value="true()"/>
-  <param name="bpcbr-54" value="true()"/>
-  <param name="bpcbr-55" value="true()"/>
-  <param name="bpcbr-56" value="true()"/>
-  <param name="bpcbr-57" value="true()"/>
-  <param name="bpcbr-58" value="true()"/>
-  <param name="bpcbr-59" value="true()"/>
-  <param name="bpcbr-60" value="true()"/>
-  <param name="bpcbr-61" value="true()"/>
-  <param name="bpcbr-62" value="true()"/>
-  <param name="bpcbr-63" value="true()"/>
-  <param name="bpcbr-64" value="true()"/>
-  <param name="bpcbr-65" value="true()"/>
-  <param name="bpcbr-66" value="true()"/>
-  <param name="bpcbr-67" value="true()"/>
-  <param name="bpcbr-68" value="true()"/>
-  <param name="bpcbr-69" value="true()"/>
+  <param name="bpcbr-39" value="count(cbc:ID) = 1 "/>
+  <param name="bpcbr-40" value="count(cbc:PrimaryAccountNumberID) = 1"/>
+  <param name="bpcbr-41" value="count(cac:PayeeParty/cac:PartyIdentification/cbc:ID) &lt;= 1"/>
+  <param name="bpcbr-44" value="count(cac:TaxCategory/cbc:Percent) &lt;= 1"/>
+  <param name="bpcbr-48" value="count(cac:TaxTotal/cac:TaxSubtotal) &gt;= 1"/>
+  <param name="bpcbr-49" value="count(cbc:TaxableAmount) = 1"/>
+  <param name="bpcbr-50" value="(xs:decimal(child::cbc:TaxAmount)= round((sum(cac:TaxSubtotal/xs:decimal(cbc:TaxAmount)) * 10 * 10)) div 100) or not(cac:TaxSubtotal)"/>
+  <param name="bpcbr-52" value="count(cac:TaxCategory/cbc:TaxExemptionReason) &lt;= 1"/>
+  <param name="bpcbr-53" value="count(@filename ) = 1"/>
+  <param name="bpcbr-54" value="count(cac:OrderLineReference/cbc:LineID) &lt;=1"/>
+  <param name="bpcbr-55" value="count(cbc:ID) = 1"/>
+  <param name="bpcbr-58" value="count(cac:InvoicePeriod) &lt;= 1"/>
+  <param name="bpcbr-59" value="count(cac:Price) = 1"/>
+  <param name="bpcbr-60" value="count(cac:Price/cac:AllowanceCharge) &lt;= 1"/>
+  <param name="bpcbr-61" value="count(cac:Price/cbc:BaseAmount) &lt;= 1"/>
+  <param name="bpcbr-65" value="if( count(cbc:Percent) = 1 and count(cbc:PerUnitAmount) = 1 ) then false() else true()"/>
+  <param name="bpcbr-68" value="count(cac:StandardItemIdentification/cbc:ID) = 1 or count(cbc:Description) = 1"/>
   <param name="Invoice_Period" value="cac:InvoicePeriod"/>
   <param name="Document_totals" value="cac:LegalMonetaryTotal"/>
-  <param name="Amount_due" value="cac:LegalMonetaryTotal/cbc:PayableAmount "/>
+  <param name="Attachments" value="cac:AdditionalDocumentReference/cac:Attachment/cbc:EmbeddedDocumentBinaryObject"/>
+  <param name="Allowance" value="cac:AllowanceCharge[cbc:ChargeIndicator='false']"/>
   <param name="Payee" value="cac:PayeeParty"/>
+  <param name="Credit_transfer" value="cac:PaymentMeans/cac:PayeeFinancialAccount"/>
+  <param name="Card_account" value="cac:PaymentMeans/cac:CardAccount"/>
   <param name="Tax_Representative_postal_address" value="cac:TaxRepresentativeParty/cac:PostalAddress"/>
   <param name="Tax_Representative" value="cac:TaxRepresentativeParty"/>
+  <param name="Tax_Subtotal" value="/ubl:Invoice/cac:TaxTotal/cac:TaxSubtotal | /cn:CreditNote/cac:Taxtotal/cac:TaxSubtotal"/>
   <param name="Tax_Total" value="/ubl:Invoice/cac:TaxTotal | /cn:CreditNote/cac:Taxtotal"/>
   <param name="Seller_party_legal_entity" value="cac:AccountingSupplierParty/cac:Party/cbc:PartyLegalEntity/cbc:CompanyID"/>
   <param name="Seller_party_identification" value="cac:AccountingSupplierParty/cac:Party/cbc:PartyIdentification/cbc:ID"/>
@@ -102,7 +92,7 @@
   <param name="Invoice_Line" value="cac:InvoiceLine | cac:CreditNoteLine"/>
   <param name="Document_level_allowances" value="/ubl:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator = false()] | /cn:CreditNote/cac:AllowanceCharge[cbc:ChargeIndicator = false()]"/>
   <param name="Document_level_charges" value="/ubl:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator = true()] | /cn:CreditNote/cac:AllowanceCharge[cbc:ChargeIndicator = true()]"/>
-  <param name="Invoice_line_allowances" value="//cac:InvoiceLine/cac:AllowanceCharge[cbc:ChargeIndicator = false()] | //cac:CreditNoteLine/cac:AllowanceCharge[cbc:ChargeIndicator = false()]"/>
+  <param name="Invoice_line_tax" value="//cac:InvoiceLine/cac:ClassifiedTaxCategory | //cac:CreditNoteLine/cac:ClassifiedTaxCategory"/>
   <param name="Invoice_line_charges" value="//cac:InvoiceLine/cac:AllowanceCharge[cbc:ChargeIndicator = true()] | //cac:CreditNoteLine/cac:AllowanceCharge[cbc:ChargeIndicator = true()]"/>
   <param name="Payment_instructions" value="cac:PaymentTerms"/>
   <param name="Payment_means" value="cac:PaymentMeans"/>
@@ -113,8 +103,9 @@
   <param name="Buyer_postal_address" value="cac:AccountingCustomerParty/cac:Party/cac:PostalAddress"/>
   <param name="Deliver_to_address" value="cac:Delivery/cac:DeliveryLocation/cac:Address"/>
   <param name="Buyer_electronic_address" value="cac:AccountingCustomerParty/cac:Party/cbc:EndpointID"/>
-  <param name="Item_standard_identifier" value="cac:InvoiceLine/cac:Item/cac:StandardItemIdentification/cbc:ID | cac:CreditNoteLine/cac:Item/cac:StandardItemIdentification/cbc:ID"/>
+  <param name="Item" value="//cac:Item"/>
   <param name="Item_classification_identifier" value="cac:InvoiceLine/cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode | cac:CreditNoteLine/cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode "/>
   <param name="Percent" value="(//cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:Percent | //cac:AllowanceCharge/cac:TaxCategory/cbc:Percent)"/>
   <param name="Buyer" value="cac:AccountingCustomerParty"/>
+  <param name="Delivery" value="//cac:Delivery"/>
 </pattern>
