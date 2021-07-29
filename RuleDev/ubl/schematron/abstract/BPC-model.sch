@@ -49,7 +49,6 @@
   <rule context="$Document_totals">
   </rule>
   <rule context="$Invoice">
-    <assert test="$bpcbr-01" flag="fatal" id="bpcbr-01">[bpcbr-01]-Invoice Type Code value must be Commercial Invoice (380) or Credit Note (381).</assert>
     <assert test="$bpcbr-02" flag="fatal" id="bpcbr-02">[bpcbr-02]-Cannot have more than one project reference.</assert>
     <assert test="$bpcbr-03" flag="fatal" id="bpcbr-03">[bpcbr-03]-Cannot have more than one contract number.</assert>
     <assert test="$bpcbr-04" flag="fatal" id="bpcbr-04">[bpcbr-04]-Cannot have more than one proof of delivery reference.</assert>

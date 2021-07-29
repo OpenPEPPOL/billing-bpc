@@ -28,11 +28,11 @@
     <artifactId>parent-pom</artifactId>
     <version>1.10.8</version>
   </parent>
-  <artifactId>pint-validation-rules</artifactId>
+  <artifactId>bpc-validation-rules</artifactId>
   <version>1.0.0</version>
-  <name>pint-validation-rules</name>
-  <description>PINT validation rules</description>
-  <url>https://github.com/oriol/PINT</url>
+  <name>bpc-validation-rules</name>
+  <description>BPC validation rules</description>
+  <url>https://github.com/oriol/BPC</url>
   <inceptionYear>2020</inceptionYear>
   <licenses>
     <license>
@@ -57,7 +57,7 @@
             <configuration>
               <xmlDirectory>examples</xmlDirectory>
               <schematronProcessingEngine>XSLT</schematronProcessingEngine>
-              <schematronFile>ubl/xslt/PINT-UBL-validation.xslt</schematronFile>
+              <schematronFile>ubl/xslt/BPC-UBL-validation.xslt</schematronFile>
             </configuration>
           </execution>
         </executions>

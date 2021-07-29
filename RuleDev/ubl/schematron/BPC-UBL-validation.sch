@@ -34,7 +34,7 @@
   <ns prefix="ubl" uri="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"/>
   <ns prefix="xs"  uri="http://www.w3.org/2001/XMLSchema"/>
   <phase id="BPCmodel_phase">
-    <active pattern="UBL-model"/>
+    <active pattern="BPC-model"/>
   </phase>
   <phase id="codelist_phase">
     <active pattern="Codesmodel"/>

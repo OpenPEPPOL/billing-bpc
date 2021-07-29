@@ -24,53 +24,124 @@
   <ns prefix="cn" uri="urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2" />
   <ns prefix="ubl" uri="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" />
   <ns prefix="xs" uri="http://www.w3.org/2001/XMLSchema" />
-  <phase id="Japanmodel_phase">
-    <active pattern="UBL-model" />
+  <phase id="BPCmodel_phase">
+    <active pattern="BPC-model" />
   </phase>
   <phase id="codelist_phase">
     <active pattern="Codesmodel" />
   </phase>
-  <pattern id="UBL-model">
-    <rule context="/ubl:Invoice[cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode = 'JP' ]/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme[cac:TaxScheme/normalize-space(upper-case(cbc:ID))='CT']">
-      <assert id="jp-br-01" flag="fatal" test="matches(normalize-space(cbc:CompanyID),'^T[0-9]{13}$')">[jp-br-01]- For the Japanese Suppliers, the Tax identifier must start with 'T' and must be 13 digits.</assert>
-      <assert id="jp-s-01" flag="fatal" test="((count(//cac:AllowanceCharge/cac:TaxCategory[normalize-space(cbc:ID) = 'S']) + count(//cac:ClassifiedTaxCategory[normalize-space(cbc:ID) = 'S'])) > 0 and count(cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory[normalize-space(cbc:ID) = 'S']) > 0) or ((count(//cac:AllowanceCharge/cac:TaxCategory[normalize-space(cbc:ID) = 'S']) + count(//cac:ClassifiedTaxCategory[normalize-space(cbc:ID) = 'S'])) = 0 and count(cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory[normalize-space(cbc:ID) = 'S']) = 0)">[jp-s-01]-An Invoice that contains an Invoice line (BG-25), a Document level allowance (BG-20) or a Document level charge (BG-21) where the Consumption Tax category code (BT-151, BT-95 or BT-102) is "Standard rated" shall contain in the Consumption Tax breakdown (BG-23) at least one Consumption Tax category code (BT-118) equal with "Standard rated".</assert>
-      <assert id="jp-s-02" flag="fatal" test="(exists(//cac:ClassifiedTaxCategory[normalize-space(cbc:ID) = 'S'][cac:TaxScheme/normalize-space(upper-case(cbc:ID))='VAT']) and (exists(//cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID) or exists(//cac:TaxRepresentativeParty/cac:PartyTaxScheme[cac:TaxScheme/(normalize-space(upper-case(cbc:ID)) = 'VAT')]/cbc:CompanyID))) or not(exists(//cac:ClassifiedTaxCategory[normalize-space(cbc:ID) = 'S']))">[jp-s-02]-An Invoice that contains an Invoice line (BG-25) where the Invoiced item Consumption Tax category code (BT-151) is "Standard rated" shall contain the Seller Consumption Tax Identifier (BT-31), the Seller tax registration identifier (BT-32) and/or the Seller tax representative Consumption Tax identifier (BT-63).</assert>
-      <assert id="jp-s-03" flag="fatal" test="(exists(//cac:AllowanceCharge[cbc:ChargeIndicator=false()]/cac:TaxCategory[normalize-space(cbc:ID)='S'][cac:TaxScheme/normalize-space(upper-case(cbc:ID))='VAT']) and (exists(//cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID) or exists(//cac:TaxRepresentativeParty/cac:PartyTaxScheme[cac:TaxScheme/(normalize-space(upper-case(cbc:ID)) = 'VAT')]/cbc:CompanyID))) or not(exists(//cac:AllowanceCharge[cbc:ChargeIndicator=false()]/cac:TaxCategory[normalize-space(cbc:ID)='S'][cac:TaxScheme/normalize-space(upper-case(cbc:ID))='VAT']))">[jp-s-03]-An Invoice that contains a Document level allowance (BG-20) where the Document level allowance Consumption Tax category code (BT-95) is "Standard rated" shall contain the Seller Consumption Tax Identifier (BT-31), the Seller tax registration identifier (BT-32) and/or the Seller tax representative Consumption Tax identifier (BT-63).</assert>
-      <assert id="jp-s-04" flag="fatal" test="(exists(//cac:AllowanceCharge[cbc:ChargeIndicator=true()]/cac:TaxCategory[normalize-space(cbc:ID)='S'][cac:TaxScheme/normalize-space(upper-case(cbc:ID))='VAT']) and (exists(//cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID) or exists(//cac:TaxRepresentativeParty/cac:PartyTaxScheme[cac:TaxScheme/(normalize-space(upper-case(cbc:ID)) = 'VAT')]/cbc:CompanyID))) or not(exists(//cac:AllowanceCharge[cbc:ChargeIndicator=true()]/cac:TaxCategory[normalize-space(cbc:ID)='S'][cac:TaxScheme/normalize-space(upper-case(cbc:ID))='VAT']))">[jp-s-04]-An Invoice that contains a Document level charge (BG-21) where the Document level charge Consumption Tax category code (BT-102) is "Standard rated" shall contain the Seller Consumption Tax Identifier (BT-31), the Seller tax registration identifier (BT-32) and/or the Seller tax representative Consumption Tax identifier (BT-63).</assert>
+  <pattern id="BPC-model">
+    <rule context="cac:AdditionalDocumentReference/cbc:ID">
+      <assert id="bpcbr-06" flag="fatal" test="count (@schemeID) = 1">[bpcbr-06]-Scheme Identifier does not exist when Invoiced Object Identifier is provided.</assert>
     </rule>
-    <rule context="/ubl:Invoice[cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode = 'JP' ]">
-      <assert id="jp-br-co-01" flag="fatal" test="(     round(cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/xs:decimal(cbc:Percent)) != 0      and (     xs:decimal(cac:TaxTotal/cac:TaxSubtotal/cbc:TaxAmount) >= floor(xs:decimal(cac:TaxTotal/cac:TaxSubtotal/cbc:TaxableAmount) * (cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/xs:decimal(cbc:Percent) div 100)))     and (     xs:decimal(cac:TaxTotal/cac:TaxSubtotal/cbc:TaxAmount) &lt;= ceiling(xs:decimal(cac:TaxTotal/cac:TaxSubtotal/cbc:TaxableAmount) * (cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/xs:decimal(cbc:Percent) div 100)))     )">[jp-br-co-01]-Consumption Tax category tax amount (BT-117) = Consumption Tax category taxable amount (BT-116) x (Consumption Tax category rate (BT-119) / 100), rounded to integer. The rounded result amount SHALL be between the floor and the ceiling.</assert>
+    <rule context="cac:LegalMonetaryTotal/cbc:PayableAmount" />
+    <rule context="cac:AccountingCustomerParty/cac:Party/cbc:EndpointID" />
+    <rule context="cac:AccountingCustomerParty/cac:Party/cac:PostalAddress">
+      <assert id="bpcbr-27" flag="fatal" test="count(cbc:PostalZone) = 1">[bpcbr-27]-Customer - Accounts Payable Post Code must exist exactly once.</assert>
+      <assert id="bpcbr-28" flag="fatal" test="count(cbc:CountrySubentity) = 1">[bpcbr-28]-Customer - Accounts Payable Country Subdivision must exist exactly once.</assert>
     </rule>
-    <rule context="ubl:Invoice/*[local-name()!='InvoiceLine']/*[@currencyID='JPY'] | ubl:Invoice/*[local-name()!='InvoiceLine']/*/*[@currencyID='JPY'] | //cac:InvoiceLine/cbc:LineExtensionAmount[@currencyID='JPY']">
-      <assert id="jp-br-02" flag="fatal" test="matches(normalize-space(.),'^-?[1-9][0-9]*$')">[jp-br-02]- Amount shall be integer.</assert>
+    <rule context="cac:AccountingCustomerParty">
+      <assert id="bpcbr-24" flag="fatal" test="count(cac:Party/cac:PartyLegalEntity/cbc:RegistrationName) = 1">[bpcbr-24]-Cannot have more than one Customer - Accounts Payable Trading Name.</assert>
+      <assert id="bpcbr-25" flag="fatal" test="count(cac:Party/cac:PartyName/cbc:Name) &lt;= 1">[bpcbr-25]-More than one Customer - Accounts Payable Trading Name exists.</assert>
+      <assert id="bpcbr-26" flag="fatal" test="count(cac:Party/cac:PartyLegalEntity/cbc:CompanyID) &lt;= 1">[bpcbr-26]-Cannot have more than one Customer - Accounts Payable Legal Registration Identifier.</assert>
+      <assert id="bpcbr-29" flag="fatal" test="count(cac:Party/cac:PartyName/cbc:Name) &lt;= 1">[bpcbr-29]-Cannot have more than one Customer - Buyer Trading Name</assert>
+      <assert id="bpcbr-30" flag="fatal" test="true()">[bpcbr-30]-Cannot have more than one Customer - Buyer Identifier</assert>
+      <assert id="bpcbr-31" flag="fatal" test="count(cac:Party/cac:PartyIdentification/cbc:ID/@schemeID) =1">[bpcbr-31]-Scheme Identifier must exist if Customer - Buyer Identifier is provided.</assert>
+      <assert id="bpcbr-32" flag="fatal" test="count(cac:Party/cac:PartyLegalEntity/cbc:CompanyID) &lt;= 1">[bpcbr-32]-Cannot have more than one Customer - Buyer legal registration identifier</assert>
+      <assert id="bpcbr-33" flag="fatal" test="count(cac:Party/cac:PartyLegalEntity/cbc:CompanyID/@schemeID) = 1">[bpcbr-33]-Scheme Identifier must exist if Customer - Buyer Legal Registration Identifier is provided.</assert>
     </rule>
-    <rule context="/*/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory[normalize-space(cbc:ID) = 'S'][cac:TaxScheme/normalize-space(upper-case(cbc:ID))='VAT']">
-      <assert id="jp-s-08" flag="fatal" test="every $rate in xs:decimal(cbc:Percent) satisfies (((exists(//cac:InvoiceLine[cac:Item/cac:ClassifiedTaxCategory/normalize-space(cbc:ID) = 'S'][cac:Item/cac:ClassifiedTaxCategory/xs:decimal(cbc:Percent) =$rate]) or exists(//cac:AllowanceCharge[cac:TaxCategory/normalize-space(cbc:ID)='S'][cac:TaxCategory/xs:decimal(cbc:Percent) = $rate])) and ((../xs:decimal(cbc:TaxableAmount - 1) &lt; (sum(../../../cac:InvoiceLine[cac:Item/cac:ClassifiedTaxCategory/normalize-space(cbc:ID)='S'][cac:Item/cac:ClassifiedTaxCategory/xs:decimal(cbc:Percent) =$rate]/xs:decimal(cbc:LineExtensionAmount)) + sum(../../../cac:AllowanceCharge[cbc:ChargeIndicator=true()][cac:TaxCategory/normalize-space(cbc:ID)='S'][cac:TaxCategory/xs:decimal(cbc:Percent) = $rate]/xs:decimal(cbc:Amount)) - sum(../../../cac:AllowanceCharge[cbc:ChargeIndicator=false()][cac:TaxCategory/normalize-space(cbc:ID)='S'][cac:TaxCategory/xs:decimal(cbc:Percent) = $rate]/xs:decimal(cbc:Amount)))) and (../xs:decimal(cbc:TaxableAmount + 1) > (sum(../../../cac:InvoiceLine[cac:Item/cac:ClassifiedTaxCategory/normalize-space(cbc:ID)='S'][cac:Item/cac:ClassifiedTaxCategory/xs:decimal(cbc:Percent) =$rate]/xs:decimal(cbc:LineExtensionAmount)) + sum(../../../cac:AllowanceCharge[cbc:ChargeIndicator=true()][cac:TaxCategory/normalize-space(cbc:ID)='S'][cac:TaxCategory/xs:decimal(cbc:Percent) = $rate]/xs:decimal(cbc:Amount)) - sum(../../../cac:AllowanceCharge[cbc:ChargeIndicator=false()][cac:TaxCategory/normalize-space(cbc:ID)='S'][cac:TaxCategory/xs:decimal(cbc:Percent) = $rate]/xs:decimal(cbc:Amount)))))) or (exists(//cac:CreditNoteLine[cac:Item/cac:ClassifiedTaxCategory/normalize-space(cbc:ID) = 'S'][cac:Item/cac:ClassifiedTaxCategory/xs:decimal(cbc:Percent) =$rate]) or exists(//cac:AllowanceCharge[cac:TaxCategory/normalize-space(cbc:ID)='S'][cac:TaxCategory/xs:decimal(cbc:Percent) = $rate])) and ((../xs:decimal(cbc:TaxableAmount - 1) &lt; (sum(../../../cac:CreditNoteLine[cac:Item/cac:ClassifiedTaxCategory/normalize-space(cbc:ID)='S'][cac:Item/cac:ClassifiedTaxCategory/xs:decimal(cbc:Percent) =$rate]/xs:decimal(cbc:LineExtensionAmount)) + sum(../../../cac:AllowanceCharge[cbc:ChargeIndicator=true()][cac:TaxCategory/normalize-space(cbc:ID)='S'][cac:TaxCategory/xs:decimal(cbc:Percent) = $rate]/xs:decimal(cbc:Amount)) - sum(../../../cac:AllowanceCharge[cbc:ChargeIndicator=false()][cac:TaxCategory/normalize-space(cbc:ID)='S'][cac:TaxCategory/xs:decimal(cbc:Percent) = $rate]/xs:decimal(cbc:Amount)))) and (../xs:decimal(cbc:TaxableAmount + 1) > (sum(../../../cac:CreditNoteLine[cac:Item/cac:ClassifiedTaxCategory/normalize-space(cbc:ID)='S'][cac:Item/cac:ClassifiedTaxCategory/xs:decimal(cbc:Percent) =$rate]/xs:decimal(cbc:LineExtensionAmount)) + sum(../../../cac:AllowanceCharge[cbc:ChargeIndicator=true()][cac:TaxCategory/normalize-space(cbc:ID)='S'][cac:TaxCategory/xs:decimal(cbc:Percent) = $rate]/xs:decimal(cbc:Amount)) - sum(../../../cac:AllowanceCharge[cbc:ChargeIndicator=false()][cac:TaxCategory/normalize-space(cbc:ID)='S'][cac:TaxCategory/xs:decimal(cbc:Percent) = $rate]/xs:decimal(cbc:Amount))))))">[jp-s-08]-For each different value of Consumption Tax category rate (BT-119) where the Consumption Tax category code (BT-118) is "Standard rated", the Consumption Tax category taxable amount (BT-116) in a Consumption Tax breakdown (BG-23) shall equal the sum of Invoice line net amounts (BT-131) plus the sum of document level charge amounts (BT-99) minus the sum of document level allowance amounts (BT-92) where the Consumption Tax category code (BT-151, BT-102, BT-95) is "Standard rated" and the Consumption Tax rate (BT-152, BT-103, BT-96) equals the Consumption Tax category rate (BT-119).</assert>
-      <assert id="jp-s-09" flag="fatal" test="(abs(xs:decimal(../cbc:TaxAmount)) - 1 &lt;  round((abs(xs:decimal(../cbc:TaxableAmount)) * (xs:decimal(cbc:Percent) div 100)) * 10 * 10) div 100 ) and (abs(xs:decimal(../cbc:TaxAmount)) + 1 >  round((abs(xs:decimal(../cbc:TaxableAmount)) * (xs:decimal(cbc:Percent) div 100)) * 10 * 10) div 100 )">[jp-s-09]-The Consumption Tax category tax amount (BT-117) in a Consumption Tax breakdown (BG-23) where Consumption Tax category code (BT-118) is "Standard rated" shall equal the Consumption Tax category taxable amount (BT-116) multiplied by the Consumption Tax category rate (BT-119).</assert>
-      <assert id="jp-s-10" flag="fatal" test="not(cbc:TaxExemptionReason) and not(cbc:TaxExemptionReasonCode)">[jp-s-10]-A Consumption Tax breakdown (BG-23) with Consumption Tax Category code (BT-118) "Standard rate" shall not have a Consumption Tax exemption reason code (BT-121) or Consumption Tax exemption reason text (BT-120).</assert>
+    <rule context="cac:Delivery/cac:DeliveryLocation/cac:Address" />
+    <rule context="/ubl:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator = false()] | /cn:CreditNote/cac:AllowanceCharge[cbc:ChargeIndicator = false()]" />
+    <rule context="/ubl:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator = true()] | /cn:CreditNote/cac:AllowanceCharge[cbc:ChargeIndicator = true()]" />
+    <rule context="cac:LegalMonetaryTotal" />
+    <rule context="/ubl:Invoice | /cn:CreditNote">
+      <assert id="bpcbr-02" flag="fatal" test="(count(cac:ProjectReference/cbc:ID) &lt;= 1)">[bpcbr-02]-Cannot have more than one project reference.</assert>
+      <assert id="bpcbr-03" flag="fatal" test="(count(cac:ContractDocumentReference/cbc:ID) &lt;= 1)">[bpcbr-03]-Cannot have more than one contract number.</assert>
+      <assert id="bpcbr-04" flag="fatal" test="(count(cac:ReceiptDocumentReference/cbc:ID) &lt;= 1)">[bpcbr-04]-Cannot have more than one proof of delivery reference.</assert>
+      <assert id="bpcbr-05" flag="fatal" test="(count(cac:AdditionalDocumentReference/cbc:ID) &lt;= 1)">[bpcbr-05]-More than one Invoice Object Identifier exists.</assert>
+      <assert id="bpcbr-09" flag="fatal" test="count(cac:InvoicePeriod) &lt;= 1">[bpcbr-09]-Cannot have more than one invoicing period.</assert>
+      <assert id="bpcbr-10" flag="fatal" test="normalize-space(cbc:ProfileID) = ('TBD BPC Profile Identifier')">[bpcbr-10]-Business process type must reflect a BPC identifier.</assert>
+      <assert id="bpcbr-11" flag="fatal" test="count(cbc:ProfileExecutionID) =1">[bpcbr-11]-Session Identifier must exist exactly once.</assert>
+      <assert id="bpcbr-13" flag="fatal" test="count(cac:AccountingSupplierParty) = 1">[bpcbr-13]-Cannot have more than one Supplier - Accounts Receivable Identifier.</assert>
+      <assert id="bpcbr-23" flag="fatal" test="count(cac:AccountingCustomerParty) = 1">[bpcbr-23]-Customer - Accounts Payable must exist exactly once.</assert>
+      <assert id="bpcbr-34" flag="fatal" test="count(cac:DeliveryParty/cac:PartyName/cbc:Name) &lt;= 1">[bpcbr-34]-Cannot have more than one Deliver to party name.</assert>
+      <assert id="bpcbr-39" flag="fatal" test="true()">[bpcbr-39]-Payment Account Identifier must exist if Credit Transfer information is provided.</assert>
+      <assert id="bpcbr-40" flag="fatal" test="true()">[bpcbr-40]-Payment card primary account number must exist exactly once if Payment Card Information is provided.</assert>
+      <assert id="bpcbr-41" flag="fatal" test="true()">[bpcbr-41]-Cannot have more than one Bank Assigned Creditor Identifier.</assert>
+      <assert id="bpcbr-42" flag="fatal" test="true()">[bpcbr-42]-Discount  indicator must exist</assert>
+      <assert id="bpcbr-43" flag="fatal" test="true()">[bpcbr-43]-Document level discount tax category code must reflect values from United Nations Economic Commission for Europe (UNECE) – (UNTDID) D. 16B – Duty or tax or fee category code (Subset of UNCL5305)</assert>
+      <assert id="bpcbr-44" flag="fatal" test="true()">[bpcbr-44]-Cannot have more than one Document level discount tax rate</assert>
+      <assert id="bpcbr-45" flag="fatal" test="true()">[bpcbr-45]-Charge indicator must exist</assert>
+      <assert id="bpcbr-46" flag="fatal" test="true()">[bpcbr-46]-Document level charge tax category code value must reflect United Nations Economic Commission for Europe (UNECE) – (UNTDID) D. 16B – Duty or tax or fee category code (Subset of UNCL5305).</assert>
+      <assert id="bpcbr-47" flag="fatal" test="true()">[bpcbr-47]-Document level charge reason code value must reflect United Nations Economic Commission for Europe (UNECE) - (UNTDID) – D.18A – Element 5189 (Allowance or charge identification code)</assert>
+      <assert id="bpcbr-48" flag="fatal" test="true()">[bpcbr-48]-Tax Breakdown information must exist.</assert>
+      <assert id="bpcbr-49" flag="fatal" test="true()">[bpcbr-49]-Tax Category taxable amount must exist.</assert>
+      <assert id="bpcbr-50" flag="fatal" test="true()">[bpcbr-50]-Tax amount must equal to the taxable amount times the taxable rate, rounded to two decimals.</assert>
+      <assert id="bpcbr-51" flag="fatal" test="true()">[bpcbr-51]-Tax category code must reflect value from United Nations Economic Commission for Europe (UNECE) – (UNTDID) D. 16B – Duty or tax or fee category code (Subset of UNCL5305)</assert>
+      <assert id="bpcbr-52" flag="fatal" test="true()">[bpcbr-52]-More than one Tax Exemption Reason Text entry exists.</assert>
+      <assert id="bpcbr-53" flag="fatal" test="true()">[bpcbr-53]-Attached document filename must exist exactly once.</assert>
+      <assert id="bpcbr-54" flag="fatal" test="true()">[bpcbr-54]-Purchase Order Line Number must exist exactly once.</assert>
+      <assert id="bpcbr-55" flag="fatal" test="true()">[bpcbr-55]-Delivery identifier must exist.</assert>
+      <assert id="bpcbr-56" flag="fatal" test="true()">[bpcbr-56]-Tax Category Code must reflect value from United Nations Economic Commission for Europe (UNECE) – (UNTDID) D. 16B – Duty or tax or fee category code (Subset of UNCL5305)</assert>
+      <assert id="bpcbr-57" flag="fatal" test="true()">[bpcbr-57]-Tax Scheme value specified is invalid.</assert>
+      <assert id="bpcbr-58" flag="fatal" test="true()">[bpcbr-58]- More than one Invoice Period Line exists.</assert>
+      <assert id="bpcbr-59" flag="fatal" test="true()">[bpcbr-59]- Price Details must exist exactly once.</assert>
+      <assert id="bpcbr-60" flag="fatal" test="true()">[bpcbr-60]-Cannot have more than one item price discount.</assert>
+      <assert id="bpcbr-61" flag="fatal" test="true()">[bpcbr-61]-Cannot have more than one item gross price.</assert>
+      <assert id="bpcbr-62" flag="fatal" test="true()">[bpcbr-62]-Item Price Base Quanitity Unit of Measure Code must reflect value from UN/ECE Recommendation N.20 "Codes for Units of Measure Used in International Trade"</assert>
+      <assert id="bpcbr-63" flag="fatal" test="true()">[bpcbr-63]-Code must be equal to Invoiced Quantity Unit of Measure Code.</assert>
+      <assert id="bpcbr-64" flag="fatal" test="true()">[bpcbr-64]-Code must be equal to Credited Quantity Unit of Measure Code.</assert>
+      <assert id="bpcbr-65" flag="fatal" test="true()">[bpcbr-65]-Invoiced Item Tax Rate and Per Unit Tax Amount are mutually exclusive.</assert>
+      <assert id="bpcbr-66" flag="fatal" test="true()">[bpcbr-66]-Invoiced Item Tax Category Code must reflect value from United Nations Economic Commission for Europe (UNECE) – (UNTDID) D. 16B – Duty or tax or fee category code (Subset of UNCL5305)</assert>
+      <assert id="bpcbr-67" flag="fatal" test="true()">[bpcbr-67]-Invoiced Item Tax Scheme Identifier must reflect value from United Nations Economic Commission for Europe (UNECE) – (UNTDID) D. 18A – Usage of Element 5153 (Duty/tax/fee)</assert>
+      <assert id="bpcbr-68" flag="fatal" test="true()">[bpcbr-68]-Product/service code OR Product/service description is mandatory. </assert>
+      <assert id="bpcbr-69" flag="fatal" test="true()">[bpcbr-69]-Lot identification number is not specified or exists more than once.</assert>
     </rule>
-    <rule context="cac:AllowanceCharge[cbc:ChargeIndicator=false()]/cac:TaxCategory[normalize-space(cbc:ID)='S'][cac:TaxScheme/normalize-space(upper-case(cbc:ID))='VAT']">
-      <assert id="jp-s-06" flag="fatal" test="(cbc:Percent) > 0">[jp-s-06]-In a Document level allowance (BG-20) where the Document level allowance Consumption Tax category code (BT-95) is "Standard rated" the Document level allowance Consumption Tax rate (BT-96) shall be greater than zero.</assert>
+    <rule context="//cac:InvoiceLine/cac:AllowanceCharge[cbc:ChargeIndicator = false()] | //cac:CreditNoteLine/cac:AllowanceCharge[cbc:ChargeIndicator = false()]" />
+    <rule context="//cac:InvoiceLine/cac:AllowanceCharge[cbc:ChargeIndicator = true()] | //cac:CreditNoteLine/cac:AllowanceCharge[cbc:ChargeIndicator = true()]" />
+    <rule context="cac:InvoiceLine/cac:InvoicePeriod | cac:CreditNoteLine/cac:InvoicePeriod" />
+    <rule context="cac:InvoicePeriod" />
+    <rule context="//cac:AdditionalItemProperty" />
+    <rule context="cac:InvoiceLine/cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode | cac:CreditNoteLine/cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode" />
+    <rule context="cac:InvoiceLine/cac:Item/cac:StandardItemIdentification/cbc:ID | cac:CreditNoteLine/cac:Item/cac:StandardItemIdentification/cbc:ID" />
+    <rule context="cac:PayeeParty">
+      <assert id="bpcbr-20" flag="fatal" test="count(cac:PartyLegalEntity/cbc:CompanyID/@schemeID) = 1">[bpcbr-10]-Scheme Identifier must exist if Supplier - Seller Identifier is provided.</assert>
+      <assert id="bpcbr-21" flag="fatal" test="count(cac:PartyLegalEntity/cbc:CompanyID) &lt;= 1">[bpcbr-21]-Cannot have more than one Supplier - Seller legal registration identifier.</assert>
     </rule>
-    <rule context="cac:AllowanceCharge[cbc:ChargeIndicator=true()]/cac:TaxCategory[normalize-space(cbc:ID)='S'][cac:TaxScheme/normalize-space(upper-case(cbc:ID))='VAT']">
-      <assert id="jp-s-07" flag="fatal" test="(cbc:Percent) > 0">[jp-s-07]-In a Document level charge (BG-21) where the Document level charge Consumption Tax category code (BT-102) is "Standard rated" the Document level charge Consumption Tax rate (BT-103) shall be greater than zero.  </assert>
+    <rule context="cac:PaymentTerms">
+      <assert id="bpcbr-07" flag="fatal" test="if( count( cbc:SettlementDiscountPercent ) > 0 or count( cbc:SettlementDiscountAmount ) > 0 or count( cbc:Amount ) > 0 ) then ( count( cbc:SettlementDiscountPercent ) = 1 and count( cbc:SettlementDiscountAmount ) = 1 and count( cbc:Amount ) = 1 ) else true()">[bpcbr-07]-If Payment Terms Discount Percent or Payment Terms Discount Amount or Basis for Terms Discount exist, then all three elements must exist.</assert>
+      <assert id="bpcbr-08" flag="fatal" test="xs:decimal(cbc:SettlementDiscountAmount) = xs:decimal(cbc:Amount * cbc:SettlementDiscountPercent)">[bpcbr-08]-Payment Terms Discount Amount must be equal to Payment Terms Discount Percent times Basis for Terms Discount.</assert>
     </rule>
-    <rule context="cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory[normalize-space(cbc:ID) = 'S'][cac:TaxScheme/normalize-space(upper-case(cbc:ID))='VAT'] | cac:CreditNoteLine/cac:Item/cac:ClassifiedTaxCategory[normalize-space(cbc:ID) = 'S'][cac:TaxScheme/normalize-space(upper-case(cbc:ID))='VAT']">
-      <assert id="jp-s-05" flag="fatal" test="(cbc:Percent) > 0">[jp-s-05]-In an Invoice line (BG-25) where the Invoiced item Consumption Tax category code (BT-151) is "Standard rated" the Invoiced item Consumption Tax rate (BT-152) shall be greater than zero.</assert>
+    <rule context="cac:PaymentMeans">
+      <assert id="bpcbr-36" flag="fatal" test="if (some $code in (17, 18, 20, 28, 29, 30, 32, 33, 35, 36, 39, 40, 41, 43, 48, 49, 54) satisfies normalize-space(cbc:PaymentMeansCode) = string($code) ) then count (../cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cbc:ID) = 1 else true()">[bpcbr-36]-If the Payment means type code needs an account, the Payment account identifier must exist.</assert>
+      <assert id="bpcbr-37" flag="fatal" test="count(cbc:PaymentMeansCode/@Name) &lt;= 1">[bpcbr-37]-Cannot have more than one payment method text entry.</assert>
+      <assert id="bpcbr-38" flag="fatal" test="count(cbc:PaymentID) &lt;= 1">[bpcbr-38]-Cannot have more than one remittance requirement information entry.</assert>
     </rule>
+    <rule context="cac:BillingReference/cac:InvoiceDocumentReference/cbc:DocumentStatusCode">
+      <assert id="bpcbr-12" flag="fatal" test="((not(contains(normalize-space(.), ' ')) and contains(' codes 1373 ', concat(' ', normalize-space(.), ' '))))">[bpcbr-12]-Value must exist in code list UNECE-1373.</assert>
+    </rule>
+    <rule context="cac:AccountingSupplierParty">
+      <assert id="bpcbr-16" flag="fatal" test="count(cac:Party/cac:PostalAddress) = 1">[bpcbr-16]-Supplier - Accounts Receivable Postal Address must exist exactly once.</assert>
+      <assert id="bpcbr-17" flag="fatal" test="count(cac:Party/cac:PostalAddress/cbc:PostalZone) = 1">[bpcbr-17]-Supplier - Accounts Reivable Post Code must exist exactly once.</assert>
+      <assert id="bpcbr-18" flag="fatal" test="count(cac:Party/cac:PostalAddress/cbc:CountrySubentity) = 1">[bpcbr-18]-Supplier - Accounts Reivable Country Subdivision must exist exactly once.</assert>
+      <assert id="bpcbr-19" flag="fatal" test="count(cac:Party/cac:PartyLegalEntity/cbc:CompanyID) &lt;= 1">[bpcbr-19]-Cannot have more than one Supplier - Seller Identifier.</assert>
+      <assert id="bpcbr-22" flag="fatal" test="count(cac:Party/cac:PartyLegalEntity/cbc:CompanyID/@schemeID) = 1">[bpcbr-22]-Scheme Identifier must exist if Supplier - Seller Legal Registration Identifier is provided.</assert>
+    </rule>
+    <rule context="cac:AccountingSupplierParty/cac:Party/cbc:PartyIdentification/cbc:ID">
+      <assert id="bpcbr-14" flag="fatal" test="count(@schemeID) = 1">[bpcbr-14]-Scheme Identifier must exist if Supplier - Accounts Receivable Identifier is provided.</assert>
+    </rule>
+    <rule context="cac:AccountingSupplierParty/cac:Party/cbc:PartyLegalEntity/cbc:CompanyID">
+      <assert id="bpcbr-15" flag="fatal" test="count(@schemeID) = 1">[bpcbr-15]-Scheme Identifier must exist if Supplier - Accounts Receivable Legal Registration Identifier is provided.</assert>
+    </rule>
+    <rule context="cac:AccountingSupplierParty/cac:Party/cbc:EndpointID" />
+    <rule context="cac:AccountingSupplierParty/cac:Party/cac:PostalAddress" />
+    <rule context="cac:TaxRepresentativeParty" />
+    <rule context="cac:TaxRepresentativeParty/cac:PostalAddress" />
+    <rule context="/ubl:Invoice/cac:TaxTotal | /cn:CreditNote/cac:Taxtotal" />
   </pattern>
   <pattern id="Codesmodel">
     <rule flag="fatal" context="cbc:InvoiceTypeCode | cbc:CreditNoteTypeCode">
-      <assert id="jp-cl-01" flag="fatal" test="(self::cbc:InvoiceTypeCode and ((not(contains(normalize-space(.), ' ')) and contains(' 80 82 84 380 383 386 393 395 575 623 780 ', concat(' ', normalize-space(.), ' '))))) or (self::cbc:CreditNoteTypeCode and ((not(contains(normalize-space(.), ' ')) and contains(' 81 83 381 396 532 ', concat(' ', normalize-space(.), ' ')))))">[jp-cl-01]-The document type code MUST be coded by the Japanese invoice and Japanese credit note related code lists of UNTDID 1001.</assert>
-    </rule>
-    <rule flag="fatal" context="cac:PaymentMeans/cbc:PaymentMeansCode">
-      <assert id="jp-cl-02" flag="fatal" test="( ( not(contains(normalize-space(.),' ')) and contains( ' 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 70 74 75 76 77 78 91 92 93 94 95 96 97 ZZZ Z01 Z02 ',concat(' ',normalize-space(.),' ') ) ) )">[jp-cl-02]-Payment means in a Japanese invoice MUST be coded using a restricted version of the UNCL4461 code list (adding Z01 and Z02)</assert>
-    </rule>
-    <rule flag="fatal" context="cac:TaxCategory/cbc:ID | cac:ClassifiedTaxCategory/cbc:ID">
-      <assert id="jp-cl-03" flag="fatal" test="( ( not(contains(normalize-space(.),' ')) and contains( ' AA S Z G O E ',concat(' ',normalize-space(.),' ') ) ) )">[jp-cl-03]- Japanese invoice tax categories MUST be coded using UNCL5305 code list</assert>
-    </rule>
-    <rule flag="fatal" context="cbc:TaxExemptionReasonCode">
-      <assert id="jp-cl-04" flag="fatal" test="((not(contains(normalize-space(.), ' ')) and contains(' ZZZ ', concat(' ', normalize-space(upper-case(.)), ' '))))">[jp-cl-04]-Tax exemption reason code identifier scheme identifier MUST belong to the ????</assert>
+      <assert id="ibr-cl-01" flag="fatal" test="(self::cbc:InvoiceTypeCode and ((not(contains(normalize-space(.), ' ')) and contains(' 380 ', concat(' ', normalize-space(.), ' '))))) or (self::cbc:CreditNoteTypeCode and ((not(contains(normalize-space(.), ' ')) and contains(' 381 ', concat(' ', normalize-space(.), ' ')))))">[bpcbr-01]-Invoice Type Code value must be Commercial Invoice (380) or Credit Note (381).</assert>
     </rule>
   </pattern>
 </schema>

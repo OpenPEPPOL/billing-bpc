@@ -19,14 +19,13 @@
 <!-- Data binding to UBL syntax for model -->
 <!-- Timestamp: 2020-02-11 12:09:56 +0200 -->
 <pattern xmlns="http://purl.oclc.org/dsdl/schematron" is-a="model" id="BPC-model">
-  <param name="bpcbr-01" value="normalize-space(cbc:InvoiceTypeCode) = '380' or normalize-space(cbc:CreditNoteTypeCode) = '381'"/>
   <param name="bpcbr-02" value="(count(cac:ProjectReference/cbc:ID) &lt;= 1)"/>  
   <param name="bpcbr-03" value="(count(cac:ContractDocumentReference/cbc:ID) &lt;= 1)"/>
   <param name="bpcbr-04" value="(count(cac:ReceiptDocumentReference/cbc:ID) &lt;= 1)"/>
   <param name="bpcbr-05" value="(count(cac:AdditionalDocumentReference/cbc:ID) &lt;= 1)"/>
   <param name="bpcbr-06" value="count (@schemeID) = 1"/>
   <param name="bpcbr-07" value="if( count( cbc:SettlementDiscountPercent ) > 0 or count( cbc:SettlementDiscountAmount ) > 0 or count( cbc:Amount ) > 0 ) then ( count( cbc:SettlementDiscountPercent ) = 1 and count( cbc:SettlementDiscountAmount ) = 1 and count( cbc:Amount ) = 1 ) else true()"/>
-  <param name="bpcbr-08" value="decimal(cbc:SettlementDiscountAmount) = decimal(cbc:Amount * cbc:SettlementDiscountPercent)"/>
+  <param name="bpcbr-08" value="xs:decimal(cbc:SettlementDiscountAmount) = xs:decimal(cbc:Amount * cbc:SettlementDiscountPercent)"/>
   <param name="bpcbr-09" value="count(cac:InvoicePeriod) &lt;= 1"/>
   <param name="bpcbr-10" value="normalize-space(cbc:ProfileID) = ('TBD BPC Profile Identifier')"/>
   <param name="bpcbr-11" value="count(cbc:ProfileExecutionID) =1"/>
@@ -48,6 +47,7 @@
   <param name="bpcbr-27" value="count(cbc:PostalZone) = 1"/>
   <param name="bpcbr-28" value="count(cbc:CountrySubentity) = 1"/>
   <param name="bpcbr-29" value="count(cac:Party/cac:PartyName/cbc:Name) &lt;= 1"/>
+  <param name="bpcbr-30" value="true()"/>
   <param name="bpcbr-31" value="count(cac:Party/cac:PartyIdentification/cbc:ID/@schemeID) =1"/>
   <param name="bpcbr-32" value="count(cac:Party/cac:PartyLegalEntity/cbc:CompanyID) &lt;= 1"/>
   <param name="bpcbr-33" value="count(cac:Party/cac:PartyLegalEntity/cbc:CompanyID/@schemeID) = 1"/>
